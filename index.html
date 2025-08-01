@@ -73,26 +73,43 @@
     </style>
 </head>
 <body class="bg-gray-50 font-sans antialiased">
-    <!-- Navigation -->
+<!-- Navigation -->
     <nav class="bg-white shadow-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
+                <!-- Logo -->
                 <div class="flex items-center">
                     <a href="#" class="flex items-center text-xl font-bold text-blue-600">
                         <i class="fas fa-book-open mr-3"></i>
                         <span>Claude Bouchet</span>
                     </a>
                 </div>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#books" class="nav-link text-gray-700 hover:text-blue-600">Livres</a>
-                    <a href="#about-me" class="nav-link text-gray-700 hover:text-blue-600">À propos</a>
-                    <a href="#contact" class="nav-link text-gray-700 hover:text-blue-600">Contact</a>
+
+                <!-- Section de droite (contient les liens pour ordinateur ET le bouton mobile) -->
+                <div class="flex items-center">
+                    <!-- Menu pour Ordinateur (visible sur écrans moyens et plus) -->
+                    <div class="hidden md:flex items-center space-x-8">
+                        <a href="#books" class="nav-link text-gray-700 hover:text-blue-600">Livres</a>
+                        <a href="#about-me" class="nav-link text-gray-700 hover:text-blue-600">À propos</a>
+                        <a href="#contact" class="nav-link text-gray-700 hover:text-blue-600">Contact</a>
+                    </div>
+                    
+                    <!-- Bouton du Menu Mobile (visible uniquement sur petits écrans) -->
+                    <div class="md:hidden flex items-center">
+                        <button id="mobile-menu-button" class="text-gray-500 hover:text-blue-600 focus:outline-none">
+                            <i class="fas fa-bars text-2xl"></i>
+                        </button>
+                    </div>
                 </div>
-                <div class="md:hidden flex items-center">
-                    <button class="text-gray-500 hover:text-blue-600 focus:outline-none">
-                        <i class="fas fa-bars text-2xl"></i>
-                    </button>
-                </div>
+            </div>
+        </div>
+
+        <!-- Menu Mobile déroulant (caché par défaut) -->
+        <div id="mobile-menu" class="hidden md:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#books" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-white hover:bg-blue-600">Livres</a>
+                <a href="#about-me" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-white hover:bg-blue-600">À propos</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-white hover:bg-blue-600">Contact</a>
             </div>
         </div>
     </nav>
@@ -124,7 +141,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
                 <div class="book-card bg-white rounded-lg overflow-hidden shadow-md animate-fadeIn" style="animation-delay: 0.2s;">
                     <div class="book-cover p-6"><img src="./Premiere_Page_CGA.png" alt="Couverture du livre CGA" class="w-full h-[545px] object-cover rounded"></div>
-                    <div class="px-6 pb-8"><h3 class="text-xl font-bold text-gray-900 mb-2">- Autopsy</h3><p class="text-gray-600 mb-4">Publié en 2024</p><button onclick="openBookModal('CGA')" class="action-btn w-full py-3 px-4 rounded-md text-white font-medium flex items-center justify-center"><i class="fas fa-book-reader mr-2"></i> Voir la description</button></div>
+                    <div class="px-6 pb-8"><h3 class="text-xl font-bold text-gray-900 mb-2">CGA - Autopsy</h3><p class="text-gray-600 mb-4">Publié en 2024</p><button onclick="openBookModal('CGA')" class="action-btn w-full py-3 px-4 rounded-md text-white font-medium flex items-center justify-center"><i class="fas fa-book-reader mr-2"></i> Voir la description</button></div>
                 </div>
                 <div class="book-card bg-white rounded-lg overflow-hidden shadow-md animate-fadeIn" style="animation-delay: 0.4s;">
                     <div class="book-cover p-6"><img src="./Premiere Page - Jouer avec les mots.png" alt="Couverture du livre Jouer avec les mots" class="w-full h-[545px] object-cover rounded"></div>
@@ -190,7 +207,7 @@
     <script>
         const books = {
             'CGA': { 
-                title: 'CGA - Autopsy', 
+                title: 'CGA', 
                 description: `<p>Il semblerait, selon certains, qu’à la naissance, notre destin nous prend en main, et cela jusqu’à la fin de nos jours. Le sort qui nous est réservé pendant notre vie ne nous appartiendrait pas. Nous serions une voie où il n’y aurait pas d’aiguillage.</p><p>Beaucoup de personnes, croyantes ou non, essaient de percer le secret de leur avenir, soit pour essayer de juguler leur destin, soit pour espérer voir poindre après des méandres tortueux un espoir pour s’y accrocher.</p><p>Les méthodes qui nous sont proposées sont nombreuses et font l’objet de transactions mercantiles qui sont souvent un abus de confiance. Je ne suis pas un adepte de ces séances de divinatoires en ce qui concerne l’avenir. Mais, inconsciemment, je crois qu’au premier jour de la conception de notre vie, nous sommes différenciés des autres par une estampille particulière, caractérisée par un MOI à nul autre pareil. À ce niveau, j’ai une septicité assez marquée, ce qui prouve que s’il n’y a pas de conviction il y a doute. Il me semble qu’à partir des influences astrales, il est possible de faire les contours d’une personnalité et de ce fait, voir les pièges qui peuvent se présenter en fonction de la conjecture caractérielle. C’est pour cela, sans mettre les pieds dans l’horoscope fantaisistes et parfois malsain, j’ai eu à certains moments de ma vie l’occasion de me faire un bilan astrologique.</p><p>Je ne suis pas un exemple de modèle, une référence.</p><p>Mon éducation, ma vie professionnelles, mes sinuosités familiales, mes préceptes philosophicoreligieux, mes constatations extérieures et mes observations m’ont amené à analyser les « folles herbes » qui s’épanouissent dans notre « jardin environnemental ».</p><p>Les injustices, mes doutes, mes révoltes m’ont permis de faire une petite analyse que je concrétise en mettant tout cela par écrit.</p><p>Je n’ai fait la guerre et j’en remercie le ciel. Je n’ai jamais eu dans ma ligne de tir un homme à tuer de sang-froid même pour me défendre. Mes récits guerriers sont donc inexistants. Je n’ai juste que quelques petits faits à mettre sur ces pages. Ils ont seulement la particularité d’être personnels et sortant un peu du commun. Ces petites anecdotes peuvent parfois porter à sourire mais certaines ont failli être grave de conséquence.</p><p>En dehors du fait d’écrire ces petites aventures, pour celui et celle que ça intéresse, peuvent mettre en exergue certains points de ma personnalité. Je lève un voile sur mes sentiments, ma réserve, ma timidité, ma curiosité, mes ressentiments voire mes extravagances, et encore je ne me dévoile pas entièrement, car, comme tout le monde, j’ai mon petit jardin secret.</p>`, 
                 pages: '385', 
                 file: './CGA.pdf' 
@@ -222,6 +239,13 @@
         const imageModal = document.getElementById('imageModal');
         const galleryImageEl = document.getElementById('galleryImage');
         const galleryCounterEl = document.getElementById('galleryCounter');
+		
+		const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
 
         function openBookModal(title) {
             const book = books[title];
