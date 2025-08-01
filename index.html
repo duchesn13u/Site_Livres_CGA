@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oeuvres Littéraires de Claude Bouchet</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .book-card {
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+        }
+        .book-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        .book-cover {
+            perspective: 1000px;
+        }
+        .book-cover img {
+            transition: transform 0.5s;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+        }
+        .action-btn {
+            background: linear-gradient(135deg, #2563EB 0%, #3B82F6 100%);
+            transition: all 0.3s ease;
+        }
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #2563EB;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        #modalDescription p, #modalDescription blockquote, #modalDescription ul {
+            margin-bottom: 1rem;
+        }
+        #modalDescription blockquote {
+            padding-left: 1.5rem;
+            border-left: 3px solid #ddd;
+            font-style: italic;
+        }
+        #modalDescription ul {
+            list-style-position: inside;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        .modal {
+            transition: opacity 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans antialiased">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="#" class="flex items-center text-xl font-bold text-blue-600">
+                        <i class="fas fa-book-open mr-3"></i>
+                        <span>Claude Bouchet</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#books" class="nav-link text-gray-700 hover:text-blue-600">Livres</a>
+                    <a href="#about-me" class="nav-link text-gray-700 hover:text-blue-600">À propos</a>
+                    <a href="#contact" class="nav-link text-gray-700 hover:text-blue-600">Contact</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button class="text-gray-500 hover:text-blue-600 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative bg-gradient-to-r from-blue-800 to-blue-600 text-white py-20">
+        <div class="absolute inset-0 opacity-50" style="background-image: url('./BNF.jpg'); background-size: cover; background-position: center;"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="md:w-2/3 lg:w-1/2 animate-fadeIn">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">Oeuvres Littéraires de Claude Bouchet</h1>
+                <p class="text-xl mb-8">Trois chefs-d'œuvre à explorer.</p>
+                <p class="text-lg mt-4 italic text-gray-200">Mis en page et préface réalisées par Antoine Duchesne, petit-fils de Claude Bouchet.</p>
+                <div class="mt-8 flex items-center space-x-4">
+                    <a href="#books" class="inline-block bg-white text-blue-600 px-6 py-3 rounded-md font-medium hover:bg-gray-100 transition duration-300">Explorer les Livres</a>
+                    <button onclick="openImageModal()" class="inline-block bg-transparent border border-white text-white px-6 py-3 rounded-md font-medium hover:bg-white hover:text-blue-600 transition duration-300">
+                        Photos Souvenirs
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Books Section -->
+    <section id="books" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-1500 mb-4">La Collection</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div class="book-card bg-white rounded-lg overflow-hidden shadow-md animate-fadeIn" style="animation-delay: 0.2s;">
+                    <div class="book-cover p-6"><img src="./Premiere_Page_CGA.png" alt="Couverture du livre CGA" class="w-full h-[545px] object-cover rounded"></div>
+                    <div class="px-6 pb-8"><h3 class="text-xl font-bold text-gray-900 mb-2">CGA - Autopsy</h3><p class="text-gray-600 mb-4">Publié en 2024</p><button onclick="openBookModal('CGA')" class="action-btn w-full py-3 px-4 rounded-md text-white font-medium flex items-center justify-center"><i class="fas fa-book-reader mr-2"></i> Voir la description</button></div>
+                </div>
+                <div class="book-card bg-white rounded-lg overflow-hidden shadow-md animate-fadeIn" style="animation-delay: 0.4s;">
+                    <div class="book-cover p-6"><img src="./Premiere Page - Jouer avec les mots.png" alt="Couverture du livre Jouer avec les mots" class="w-full h-[545px] object-cover rounded"></div>
+                    <div class="px-6 pb-8"><h3 class="text-xl font-bold text-gray-900 mb-2">Jouer avec les mots</h3><p class="text-gray-600 mb-4">Publié en 2024</p><button onclick="openBookModal('Jouer avec les mots')" class="action-btn w-full py-3 px-4 rounded-md text-white font-medium flex items-center justify-center"><i class="fas fa-book-reader mr-2"></i> Voir la description</button></div>
+                </div>
+                <div class="book-card bg-white rounded-lg overflow-hidden shadow-md animate-fadeIn" style="animation-delay: 0.6s;">
+                    <div class="book-cover p-6"><img src="./Première Page - Les Chemins de la Mémoire.png" alt="Couverture du livre Les Chemins de la Mémoire" class="w-full h-[545px] object-cover rounded"></div>
+                    <div class="px-6 pb-8"><h3 class="text-xl font-bold text-gray-900 mb-2">Les Chemins de la Mémoire</h3><p class="text-gray-600 mb-4">Publié en 2024</p><button onclick="openBookModal('Les Chemins de la Mémoire')" class="action-btn w-full py-3 px-4 rounded-md text-white font-medium flex items-center justify-center"><i class="fas fa-book-reader mr-2"></i> Voir la description</button></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Book Preview Modal -->
+    <div id="bookModal" class="modal fixed inset-0 bg-black bg-opacity-75 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg max-w-2xl w-full max-h-screen overflow-y-auto">
+            <div class="p-6"><div class="flex justify-between items-start mb-4"><h3 id="modalTitle" class="text-2xl font-bold text-gray-900"></h3><button onclick="closeModal('bookModal')" class="text-gray-500 hover:text-gray-700"><i class="fas fa-times text-2xl"></i></button></div><div id="modalDescription" class="text-gray-700 mb-6 prose"></div><div class="flex flex-col sm:flex-row justify-between items-center mt-6 pt-4 border-t"><div class="mb-4 sm:mb-0"><p id="modalDetails" class="text-gray-600"></p></div><a id="downloadLink" href="#" download class="action-btn px-6 py-3 rounded-md text-white font-medium flex items-center justify-center"><i class="fas fa-download mr-2"></i> Télécharger le PDF</a></div></div>
+        </div>
+    </div>
+    
+    <!-- Image Gallery Modal -->
+    <div id="imageModal" class="modal fixed inset-0 bg-black bg-opacity-90 z-50 hidden flex items-center justify-center p-4">
+        <div class="w-full h-full flex items-center justify-center relative">
+            <img id="galleryImage" src="" alt="Photo souvenir" class="max-w-full max-h-full object-contain rounded-lg">
+            <button onclick="showPreviousImage()" class="absolute top-1/2 left-4 -translate-y-1/2 bg-white/20 text-white rounded-full h-12 w-12 flex items-center justify-center hover:bg-white/40 transition text-2xl"><i class="fas fa-chevron-left"></i></button>
+            <button onclick="showNextImage()" class="absolute top-1/2 right-4 -translate-y-1/2 bg-white/20 text-white rounded-full h-12 w-12 flex items-center justify-center hover:bg-white/40 transition text-2xl"><i class="fas fa-chevron-right"></i></button>
+            <div id="galleryCounter" class="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 text-white text-sm px-3 py-1 rounded-full"></div>
+            <button onclick="closeModal('imageModal')" class="absolute top-4 right-4 text-white bg-black/50 rounded-full h-10 w-10 flex items-center justify-center hover:bg-black/70 transition text-xl"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
+
+    <!-- About Me Section -->
+    <section id="about-me" class="py-16 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12"><h2 class="text-3xl font-bold text-gray-900 mb-4">À propos de l'éditeur</h2></div>
+            <div class="bg-gray-50 rounded-lg shadow-lg p-8 md:flex md:items-center md:space-x-8">
+                <div class="md:w-1/3 text-center md:text-left mb-6 md:mb-0"><img src="./Antoine_Duchesne.jpeg" alt="Photo de Antoine Duchesne" class="w-48 h-48 rounded-full mx-auto shadow-md object-cover"></div>
+                <div class="md:w-2/3">
+                    <p class="text-gray-700 mb-4">Bonjour, je suis Antoine Duchesne, le petit-fils maternel de Claude Bouchet.<br><br>Ingénieur de formation, je suis animé par une passion pour de nombreux domaines comme le sport et la musique, avec un amour tout particulier pour l'univers de l'art et des livres.</p>
+                    <p class="text-gray-700 mb-4">Je suis particulièrement reconnaissant pour tout ce que mon grand-père m'a transmis et continue de m'inspirer. À travers ses relations, il a su transmettre ses passions : son amour de la langue française, son goût prononcé pour l’Histoire, son engouement pour les collections, son engagement écologique, sa sensibilité musicale mais aussi sa rigueur intellectuelle et scientifique, qui sont autant d’atouts précieux.</p>
+                    <p class="text-gray-700">Son exemple m'a toujours encouragé à viser l’excellence. Mettre en lumière ses écrits est aujourd'hui une immense joie et une façon de partager son talent exceptionnel. J'ai hâte que vous puissiez le découvrir à votre tour à travers ses ouvrages.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12"><h2 class="text-3xl font-bold text-gray-900 mb-4">Me Contacter</h2><p class="text-lg text-gray-600">Pour toute question, n'hésitez pas à me joindre.</p></div>
+            <div class="max-w-lg mx-auto bg-white rounded-lg shadow-lg p-8 text-center">
+                <div class="flex items-center justify-center mb-5"><i class="fas fa-envelope text-2xl text-blue-600 mr-3"></i><a href="mailto:antoine.dchn@gmail.com?subject=Question%20à%20propos%20des%20oeuvres%20de%20Claude%20Bouchet&body=Bonjour%20Antoine,%0D%0A%0D%0A[Votre%20message%20ici]%0D%0A%0D%0A--%0D%0AMon%20numéro%20:%200628405796" class="text-xl font-semibold text-blue-600 hover:text-blue-800 transition duration-300 ease-in-out">antoine.dchn@gmail.com</a></div>
+                <div class="flex items-center justify-center"><i class="fas fa-phone text-2xl text-blue-600 mr-3"></i><a href="tel:0628405796" class="text-xl font-semibold text-blue-600 hover:text-blue-800 transition duration-300 ease-in-out">06 28 40 57 96</a></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-6 text-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-gray-400"><p>© 2025 Claude Bouchet et Antoine Duchesne Literary Archive. Tous droits réservés.</p></div>
+    </footer>
+
+    <script>
+        const books = {
+            'CGA': { 
+                title: 'CGA', 
+                description: `<p>Il semblerait, selon certains, qu’à la naissance, notre destin nous prend en main, et cela jusqu’à la fin de nos jours. Le sort qui nous est réservé pendant notre vie ne nous appartiendrait pas. Nous serions une voie où il n’y aurait pas d’aiguillage.</p><p>Beaucoup de personnes, croyantes ou non, essaient de percer le secret de leur avenir, soit pour essayer de juguler leur destin, soit pour espérer voir poindre après des méandres tortueux un espoir pour s’y accrocher.</p><p>Les méthodes qui nous sont proposées sont nombreuses et font l’objet de transactions mercantiles qui sont souvent un abus de confiance. Je ne suis pas un adepte de ces séances de divinatoires en ce qui concerne l’avenir. Mais, inconsciemment, je crois qu’au premier jour de la conception de notre vie, nous sommes différenciés des autres par une estampille particulière, caractérisée par un MOI à nul autre pareil. À ce niveau, j’ai une septicité assez marquée, ce qui prouve que s’il n’y a pas de conviction il y a doute. Il me semble qu’à partir des influences astrales, il est possible de faire les contours d’une personnalité et de ce fait, voir les pièges qui peuvent se présenter en fonction de la conjecture caractérielle. C’est pour cela, sans mettre les pieds dans l’horoscope fantaisistes et parfois malsain, j’ai eu à certains moments de ma vie l’occasion de me faire un bilan astrologique.</p><p>Je ne suis pas un exemple de modèle, une référence.</p><p>Mon éducation, ma vie professionnelles, mes sinuosités familiales, mes préceptes philosophicoreligieux, mes constatations extérieures et mes observations m’ont amené à analyser les « folles herbes » qui s’épanouissent dans notre « jardin environnemental ».</p><p>Les injustices, mes doutes, mes révoltes m’ont permis de faire une petite analyse que je concrétise en mettant tout cela par écrit.</p><p>Je n’ai fait la guerre et j’en remercie le ciel. Je n’ai jamais eu dans ma ligne de tir un homme à tuer de sang-froid même pour me défendre. Mes récits guerriers sont donc inexistants. Je n’ai juste que quelques petits faits à mettre sur ces pages. Ils ont seulement la particularité d’être personnels et sortant un peu du commun. Ces petites anecdotes peuvent parfois porter à sourire mais certaines ont failli être grave de conséquence.</p><p>En dehors du fait d’écrire ces petites aventures, pour celui et celle que ça intéresse, peuvent mettre en exergue certains points de ma personnalité. Je lève un voile sur mes sentiments, ma réserve, ma timidité, ma curiosité, mes ressentiments voire mes extravagances, et encore je ne me dévoile pas entièrement, car, comme tout le monde, j’ai mon petit jardin secret.</p>`, 
+                pages: '385', 
+                file: './CGA.pdf' 
+            },
+            'Jouer avec les mots': { 
+                title: 'Jouer avec les mots', 
+                description: `<p>Il ne faut pas chercher dans les textes qui suivent, que je baptise pompeusement poèmes, une quelconque perfection dans le maniement des vers. Les phrases qui se veulent être semblables à des alexandrins sont parfois bancales.</p><p>Ces lignes ne sont que le reflet de la vision :</p><ul><li>- D’un jeune homme devant un monde qui s’ouvre à lui ;</li><li>- D’un mari qui se heurte à une vie conjugale peu harmonieuse ;</li><li>- D’un père peu présent du fait de la séparation du couple.</li></ul><p>Je les ai écrites à des moments précis, motivé par des faits ponctuels :</p><ul><li>- Surpris par une découverte ;</li><li>- Déçu par une réaction ;</li><li>- Attristé par une nouvelle ;</li><li>- Furieux suite à une querelle ;</li><li>- Peiné par une incompréhension ;</li><li>- Poussé parfois par du vague à l’âme.</li></ul><p>J’ai essayé de transcrire mes sentiments, voire ressentiments, ne pouvant dialoguer, sur du papier qui ressemble quelque part à un miroir de l’Esprit ou à un confident et qui a l’avantage d’être plus conservateur que la mémoire.</p><p>Quels que soient les événements qui ont traversé ma vie, on remarquera qu’il n’y a aucune noirceur dans mes propos et qu’aucune rancune ne vient assombrir les tableaux.</p><p>L’ensemble forme un document qui laisse suinter une partie de ma personnalité.</p>`, 
+                pages: '80', 
+                file: './Jouer avec les mots.pdf' 
+            },
+            'Les Chemins de la Mémoire': { 
+                title: 'Les Chemins de la Mémoire', 
+                description: `<p>J’espère que mes descendants conserveront quelque part dans leur mémoire le souvenir des parents dont ils portent dans leurs veines quelques gouttes de leur sang.</p><blockquote>« Qui oublie ses racines perd une partie de son identité ».</blockquote><p>La mémoire est une voie bordée de souvenirs qui permet à l’esprit, la conservation du temps écoulé, l’entretien du savoir et de la science acquise antérieurement, pour que l’oubli ne nous fasse pas tomber dans le fatalisme du proverbe arabe « Lei fat mat » (le passé est mort). Au contraire, c’est au passé que nous devons ce que nous sommes et l’oubli voudrait détruire les liens qui nous rattachent à tout ce qui nous a précédé, renier nos racines. Au même titre que l’histoire de France appartient à la nation, celle qui concerne nos ancêtres fait partie de notre héritage et nous colle à la peau sans que nous nous en rendions compte. Le patronyme en est le symbole le plus flagrant. L’ignorer serait faire preuve de la plus grande désinvolture qui nous priverait d’une foule de renseignements, d’enseignements. Ne pas connaître nos antécédents, c’est refuser de savoir qui nous sommes ; c’est rejeter une partie de notre personnalité. Le passé n’est pas forcément rétrograde ; il aide à éclairer le présent. C’est une référence, c’est une histoire, c’est un nom, c’est un patrimoine, c’est un héritage que nous n’avons pas le droit de laisser sombrer dans le néant.</p><p>La sagesse africaine dans sa simplicité, en deux mots, résume dans un proverbe tout le texte que je me suis efforcé à écrire.</p><blockquote>« Si un jour dans ta vie tu ne sais pas où tu vas, retourne-toi, tu sauras d’où tu viens ».</blockquote>`, 
+                pages: '496', 
+                file: './Les Chemins de la Mémoire.pdf' 
+            }
+        };
+        
+        // MODIFICATION DE LA LISTE DES IMAGES
+        const galleryImages = [
+            'souvenir-0.jpg', 'souvenir-1.jpg', 'souvenir-2.jpg', 'souvenir-3.jpg',
+            'souvenir-4.jpg', 'souvenir-5.jpg', 'souvenir-6.jpg', 'souvenir-7.jpg',
+            'souvenir-8.jpg', 'souvenir-9.jpg', 'souvenir-10.jpg', 'souvenir-11.jpg',
+            'souvenir-12.jpg', 'souvenir-13.jpg', 'souvenir-14.jpg', 'souvenir-15.jpg'
+        ];
+        let currentImageIndex = 0;
+
+        const bookModal = document.getElementById('bookModal');
+        const imageModal = document.getElementById('imageModal');
+        const galleryImageEl = document.getElementById('galleryImage');
+        const galleryCounterEl = document.getElementById('galleryCounter');
+
+        function openBookModal(title) {
+            const book = books[title];
+            document.getElementById('modalTitle').textContent = book.title;
+            document.getElementById('modalDescription').innerHTML = book.description;
+            document.getElementById('modalDetails').textContent = `Pages: ${book.pages}`;
+            document.getElementById('downloadLink').href = book.file;
+            bookModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function updateGallery() {
+            galleryImageEl.src = `./${galleryImages[currentImageIndex]}`;
+            galleryCounterEl.textContent = `${currentImageIndex + 1} / ${galleryImages.length}`;
+        }
+
+        function openImageModal() {
+            currentImageIndex = 0;
+            updateGallery();
+            imageModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            document.addEventListener('keydown', handleKeydown);
+        }
+
+        function showNextImage() {
+            currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+            updateGallery();
+        }
+
+        function showPreviousImage() {
+            currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+            updateGallery();
+        }
+        
+        function handleKeydown(e) {
+            if (e.key === 'ArrowRight') showNextImage();
+            else if (e.key === 'ArrowLeft') showPreviousImage();
+            else if (e.key === 'Escape') closeModal('imageModal');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+            if (modalId === 'imageModal') {
+                document.removeEventListener('keydown', handleKeydown);
+            }
+            if (bookModal.classList.contains('hidden') && imageModal.classList.contains('hidden')) {
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        bookModal.addEventListener('click', (e) => { if (e.target === bookModal) closeModal('bookModal'); });
+        imageModal.addEventListener('click', (e) => { if (e.target === imageModal) closeModal('imageModal'); });
+    </script>
+</body>
+</html>
