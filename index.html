@@ -286,18 +286,35 @@
             else if (e.key === 'Escape') closeModal('imageModal');
         }
 
-        function closeModal(modalId) {
-            document.getElementById(modalId).classList.add('hidden');
-            if (modalId === 'imageModal') {
-                document.removeEventListener('keydown', handleKeydown);
-            }
-            if (bookModal.classList.contains('hidden') && imageModal.classList.contains('hidden')) {
-                document.body.style.overflow = 'auto';
-            }
-        }
+		// Fonction pour arrêter toutes les lectures audio/vidéo
+		function stopAllMedia() {
+		    const audios = document.querySelectorAll('audio');
+		    const videos = document.querySelectorAll('video');
+		    audios.forEach(audio => audio.pause());
+		    videos.forEach(video => video.pause());
+		}
+
+		function closeModal(modalId) {
+		    stopAllMedia(); // Arrête toutes les lectures audio/vidéo
+		    document.getElementById(modalId).classList.add('hidden');
+		    if (modalId === 'imageModal') {
+		        document.removeEventListener('keydown', handleKeydown);
+		    }
+		    if (bookModal.classList.contains('hidden') && imageModal.classList.contains('hidden')) {
+		        document.body.style.overflow = 'auto';
+		    }
+		}
+
+		// Écouteur pour arrêter la lecture si on clique à côté du lecteur (dans le modal)
+		bookModal.querySelector('.bg-white').addEventListener('click', (e) => {
+		    if (e.target.closest('audio, video') === null) {
+		        stopAllMedia();
+		    }
+		});
 
         bookModal.addEventListener('click', (e) => { if (e.target === bookModal) closeModal('bookModal'); });
         imageModal.addEventListener('click', (e) => { if (e.target === imageModal) closeModal('imageModal'); });
     </script>
 </body>
 </html>
+
