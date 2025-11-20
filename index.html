@@ -304,17 +304,22 @@
 		        document.body.style.overflow = 'auto';
 		    }
 		}
-
-		// Écouteur pour arrêter la lecture si on clique à côté du lecteur (dans le modal)
-		bookModal.querySelector('.bg-white').addEventListener('click', (e) => {
-		    if (e.target.closest('audio, video') === null) {
-		        stopAllMedia();
+		
+		// Écouteur pour fermer le modal si on clique à côté du contenu (y compris à côté du lecteur)
+		bookModal.addEventListener('click', (e) => {
+		    const modalContent = bookModal.querySelector('.bg-white');
+		    if (e.target === bookModal || (e.target !== modalContent && !modalContent.contains(e.target))) {
+		        closeModal('bookModal');
 		    }
 		});
-
-        bookModal.addEventListener('click', (e) => { if (e.target === bookModal) closeModal('bookModal'); });
-        imageModal.addEventListener('click', (e) => { if (e.target === imageModal) closeModal('imageModal'); });
+		
+		imageModal.addEventListener('click', (e) => {
+		    if (e.target === imageModal) {
+		        closeModal('imageModal');
+		    }
+		});
     </script>
 </body>
 </html>
+
 
